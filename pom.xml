@@ -2,33 +2,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>4.0.6</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/> <!-- 父 pom 所在位置，默认 ../pom.xml -->
     </parent>
-    <groupId>io.github.uipilnil</groupId>
-    <artifactId>uelk</artifactId>
+
+    <!-- 三行项目坐标 -->
+    <groupId>io.github.uipilnil</groupId> <!-- 项目的组织唯一标识 -->
+    <artifactId>uelk</artifactId> <!-- 项目名称 -->
     <version>0.0.1-SNAPSHOT</version>
-    <name>uelk</name>
-    <description>uelk</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+
     <properties>
         <java.version>17</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
