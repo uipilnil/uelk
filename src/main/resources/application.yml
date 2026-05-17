@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: uelk
+
+# Logstash 日志配置
+logstash:
+  host: localhost
+  port: 5000

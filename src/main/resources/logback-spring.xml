@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 引用 Spring Boot 的默认日志配置（色彩、格式等） -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <!-- 从 application.yml 读取的应用名 -->
+    <!-- 把 source 读到变量 name 里，读不到就用默认值 defaultValue -->
+    <springProperty scope="context" name="appName" source="spring.application.name" defaultValue="uelk"/>
+    <springProperty scope="context" name="logstashHost" source="logstash.host" defaultValue="localhost"/>
+    <springProperty scope="context" name="logstashPort" source="logstash.port" defaultValue="5000"/>
+
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>${CONSOLE_LOG_CHARSET}</charset>
+        </encoder>
+    </appender>
+
+    <!-- 把日志以 JSON 格式发送到 Logstash(通过 TCP 协议) -->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>${logstashHost}:${logstashPort}</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"> <!-- 把日志编码成 JSON -->
+            <!-- 自定义额外字段，方便在 Kibana 中筛选（示例中用服务名筛选） -->
+            <customFields>{"app_name":"${appName}"}</customFields>
+        </encoder>
+        <keepAliveDuration>1 minute</keepAliveDuration> <!-- TCP 长连接时长 -->
+        <writeTimeout>10 seconds</writeTimeout> <!-- 发送日志超时时间 -->
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOGSTASH"/>
+    </root>
+</configuration>
