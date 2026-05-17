@@ -8,9 +8,9 @@ import java.util.Map;
 
 /**
  * ELK 日志采集链路验证控制器
- *
- * <p>三种日志场景，
- * 用于验证 Filebeat -> Logstash -> Elasticsearch -> Kibana 采集链路是否正常工作</p>
+ * 
+ * 三种日志场景，
+ * 用于验证 Filebeat -> Logstash -> Elasticsearch -> Kibana 采集链路是否正常工作
  *
  * @author uipilnil
  */

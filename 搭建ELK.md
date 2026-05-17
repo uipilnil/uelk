@@ -42,6 +42,8 @@ https://release.infinilabs.com/analysis-ik/stable/
 
 ### 启动 ES、Logstash、Kibana
 
+==**Elasticsearch**==
+
 打开终端，进入 `bin` 目录，输入 `./elasticsearch` 启动 ES。
 
 ```bash
@@ -50,10 +52,38 @@ https://release.infinilabs.com/analysis-ik/stable/
 
 
 
-打开终端，进入 `bin` 目录，输入 `./logstash -e "input { stdin {} } output { stdout {} }"` 启动 Logstash。
+==**Logstash**==
+
+ 进入 logstash-8.17.0 文件夹下的 config 文件夹：
+
+- 把 `logstash-java.conf` 中的 beats 改为 TCP 协议；
+- 添加 `codec => json`，把 TCP 收到的数据按 JSON 解析。
+
+```
+input {
+  tcp {
+    port => 5044
+    codec => json
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["http://localhost:9200"]
+    index => "uelk-%{+YYYY.MM.dd}"
+    user => "elastic"
+    password => "<密码>"
+    ssl => true
+    ssl_certificate_verification => false
+  }
+}
+
+```
+
+打开终端，进入 `bin` 目录，输入命令启动 Logstash。
 
 ```bash
-./logstash -e "input { stdin {} } output { stdout {} }"
+./logstash -f ./config/logstash-sample.conf
 ```
 
 在终端输入文本，会出现处理后的结果：
@@ -61,6 +91,8 @@ https://release.infinilabs.com/analysis-ik/stable/
 ![image-20260517143009150](/Users/admin/uipilnil/project/demo/uelk/%E6%90%AD%E5%BB%BAELK.assets/image-20260517143009150.png)
 
 
+
+==**Kibana**==
 
 打开终端，进入 `bin` 目录，输入 `./kibana` 启动 Kibana。
 
@@ -161,7 +193,7 @@ bin/elasticsearch-create-enrollment-token --scope kibana
 # Logstash 日志配置
 logstash:
   host: localhost
-  port: 5000
+  port: 5044
 ```
 
 
@@ -302,8 +334,8 @@ public class WebLogAspect {
             // 记录异常类型，便于日志聚合时按异常维度聚合统计
             MDC.put("exception", ex.getClass().getName());
 
-            log.error("异常   : {}: {}", ex.getClass().getName(), ex.getMessage());
-            log.info("时长   : {}ms", executionTime);
+            log.error("异常: {}: {}", ex.getClass().getName(), ex.getMessage());
+            log.info("时长: {}ms", executionTime);
             log.info("⦁ ᴥ ⦁՞ 请求异常结束 ૮・ᴥ - ა");
 
             throw ex;

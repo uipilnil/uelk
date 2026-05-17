@@ -41,7 +41,6 @@ public class WebLogAspect {
 
     /**
      * 环绕执行，环绕在目标方法前后
-     * <p>
      * 记录请求的 URL、IP、请求方法、类名方法、参数、执行时长
      *
      * @param joinPoint 被拦截的方法
@@ -89,8 +88,8 @@ public class WebLogAspect {
             // 记录异常类型，便于日志聚合时按异常维度聚合统计
             MDC.put("exception", ex.getClass().getName());
 
-            log.error("异常   : {}: {}", ex.getClass().getName(), ex.getMessage());
-            log.info("时长   : {}ms", executionTime);
+            log.error("异常: {}: {}", ex.getClass().getName(), ex.getMessage());
+            log.info("时长: {}ms", executionTime);
             log.info("⦁ ᴥ ⦁՞ 请求异常结束 ૮・ᴥ - ა");
 
             throw ex;

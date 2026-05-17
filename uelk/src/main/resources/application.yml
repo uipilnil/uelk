@@ -5,4 +5,4 @@ spring:
 # Logstash 日志配置
 logstash:
   host: localhost
-  port: 5000
+  port: 5044
