@@ -86,9 +86,7 @@ output {
 ./logstash -f ./config/logstash-sample.conf
 ```
 
-在终端输入文本，会出现处理后的结果：
-
-![image-20260517143009150](/Users/admin/uipilnil/project/demo/uelk/%E6%90%AD%E5%BB%BAELK.assets/image-20260517143009150.png)
+在终端输入文本，会出现处理后的结果.
 
 
 
@@ -107,8 +105,6 @@ bin/elasticsearch-create-enrollment-token --scope kibana
 ```
 
 在浏览器输入 http://localhost:5601，进入 Kibana 可视化界面。
-
-![image-20260517145119611](/Users/admin/uipilnil/project/demo/uelk/%E6%90%AD%E5%BB%BAELK.assets/image-20260517145119611.png)
 
 
 
@@ -351,4 +347,4 @@ public class WebLogAspect {
 
 六、测试结果
 
-![de0499f4a5f1c92d86fa982aef49a8c8](/Users/admin/uipilnil/project/demo/uelk/%E6%90%AD%E5%BB%BAELK.assets/de0499f4a5f1c92d86fa982aef49a8c8.png)
+![de0499f4a5f1c92d86fa982aef49a8c8](/Users/admin/uipilnil/project/demo/uelk/%E6%90%AD%E5%BB%BAELK/de0499f4a5f1c92d86fa982aef49a8c8.png)
